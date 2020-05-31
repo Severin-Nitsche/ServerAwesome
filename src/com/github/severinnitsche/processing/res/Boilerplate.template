@@ -1,0 +1,59 @@
+package com.github.severinnitsche.pre.generated;
+
+import java.lang.reflect.Constructor;
+import java.io.IOException;
+import com.github.severinnitsche.processing.base.AbstractServer;
+import com.github.severinnitsche.server.FunctionalServer;
+import %source_long;
+
+/**
+ *
+ * @author Severin Leonard Christian Nitsche
+ *
+ * This is an auto generated File
+ *
+ */
+
+public class %id extends AbstractServer<%source> {
+
+  private FunctionalServer server;
+  private %source source;
+
+  public %id(Object... initArgs) throws IOException {
+    this.server = new FunctionalServer();
+    for(Constructor c : %source.class.getConstructors()) {
+      try {
+        source = (%source) c.newInstance(initArgs);
+        break;
+      } catch (Exception e) {}
+    }
+    if(source == null) throw new IllegalArgumentException("Arguments must match %source");
+  }
+
+  public %id(String config, Object... initArgs) throws IOException {
+    server = new FunctionalServer(config);
+    for(Constructor c : %source.class.getConstructors()){
+      try{
+        source = (%source) c.newInstance(initArgs);
+        break;
+      } catch (Exception e) {}
+    }
+    if(source == null) throw new IllegalArgumentException("Arguments must match %source");
+  }
+
+  @Override
+  public %source getSource() {
+    return source;
+  }
+
+  @Override
+  public void init() {
+    %register_calls
+  }
+
+  @Override
+  public void shutdown() throws IOException {
+    server.shutdown();
+  }
+
+}
